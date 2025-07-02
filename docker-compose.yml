@@ -97,9 +97,6 @@ services:
     restart: always
     expose:
       - 3000
-    networks:
-      - dokploy-network
-      - monitor-net
     labels:
       org.label-schema.group: "monitoring"
 
