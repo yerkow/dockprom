@@ -1,6 +1,8 @@
 networks:
   monitor-net:
     driver: bridge
+  dokploy-network:
+    external: true
 
 volumes:
     prometheus_data: {}
@@ -100,6 +102,7 @@ services:
     expose:
       - 3000
     networks:
+      - dokploy-network
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
