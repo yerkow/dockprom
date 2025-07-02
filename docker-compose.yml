@@ -90,6 +90,8 @@ services:
       - GF_USERS_ALLOW_SIGN_UP=false
       - GF_SERVER_ROOT_URL=https://grafana.ispark.kz/
       - GF_SERVER_SERVE_FROM_SUB_PATH=false
+      - GF_SERVER_DOMAIN=grafana.ispark.kz
+      - GF_SERVER_ENABLE_GZIP=true
     restart: always
     expose:
       - 3000
