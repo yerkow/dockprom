@@ -1,8 +1,6 @@
 networks:
   monitor-net:
     driver: bridge
-  dokploy-network:
-    external: true
 
 volumes:
     prometheus_data: {}
@@ -28,8 +26,6 @@ services:
       - 9090
     networks:
       - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
 
   alertmanager:
     image: prom/alertmanager:v0.28.0
@@ -44,8 +40,6 @@ services:
       - 9093
     networks:
       - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
 
   nodeexporter:
     image: prom/node-exporter:v1.8.2
@@ -64,9 +58,7 @@ services:
       - 9100
     networks:
       - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
-
+      
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.51.0
     container_name: cadvisor
@@ -78,14 +70,12 @@ services:
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker:/var/lib/docker:ro
-      #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+      - /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
     restart: unless-stopped
     expose:
       - 8080
     networks:
       - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
 
   grafana:
     image: grafana/grafana:11.5.1
@@ -112,5 +102,3 @@ services:
       - 9091
     networks:
       - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
